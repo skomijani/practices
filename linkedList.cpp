@@ -124,3 +124,44 @@ void partitionLinkedlist()
 	Gtail->next = NULL;
 	printLinklist(Shead);
 }
+
+
+void Palindrome_linkedlist()
+{
+	Node *head = createLinkedList();
+	Node *ptr1 = head;
+	if (head->next == NULL)
+		printf("is Palindrome\n");
+	Node *ptr2 = head->next;
+	Node * curNode_secondHalf = NULL;
+	vector<int> stack;
+	while (ptr2 != NULL)
+	{
+		stack.push_back(ptr1->value);
+		ptr1 = ptr1->next;
+		ptr2 = ptr2->next;
+		if (ptr2 != NULL)
+		{
+			curNode_secondHalf = ptr1->next;
+			ptr2 = ptr2->next;
+
+		}
+		else
+			curNode_secondHalf = ptr1;
+	}
+	while (curNode_secondHalf != NULL)
+	{
+		if (curNode_secondHalf->value == stack.back())
+		{
+			stack.pop_back();
+			curNode_secondHalf = curNode_secondHalf->next;
+		}
+		else
+		{
+			printf("is not Palindrome\n");
+			return;
+		}
+		
+	}
+	printf("is Palindrome\n");
+}
